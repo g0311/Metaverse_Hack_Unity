@@ -2,10 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class Chatting : MonoBehaviour
 {
-    public InputField _InputField;
+    public TMP_InputField T_InputField;
     public Text Chat;
     public PlayerMovement Pm;
     public CameraMovement Cm;
@@ -14,33 +15,31 @@ public class Chatting : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-        _InputField.enabled = false;
+        T_InputField.enabled = false;
     }
     // Update is called once per frame
     void Update()
     {
-        _InputField.ActivateInputField();
-        //Debug.Log("포커스 1 enabled" + _InputField.enabled);
-        //Debug.Log("포커스 2 focus" + _InputField.isFocused);
+        T_InputField.ActivateInputField();
         if (Input.GetKeyDown(KeyCode.Return))
         {
-            if (_InputField.enabled)
+            if (T_InputField.enabled)
             {
-                string Chatt = _InputField.text;
-                _InputField.text = "";
+                string Chatt = T_InputField.text;
+                T_InputField.text = "";
                 if (Chatt != "")
                 {
                     FReact.ChatfromUnity(LocalPlayerManager.instance.Nickname, Chatt);
                 }
                 //Chat.text += LocalPlayerManager.instance.Nickname + ":" + Chatt + "\n";
-                _InputField.enabled = false;
+                T_InputField.enabled = false;
                 Pm.enabled = true;
                 Cm.isESC = false;
                 Cm.enabled = true;
             }
             else
             {
-                _InputField.enabled = true;
+                T_InputField.enabled = true;
                 Pm.enabled = false;
                 Cm.enabled = false;
             }
